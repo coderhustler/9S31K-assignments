@@ -1,0 +1,27 @@
+.categories {
+    padding: 20px 0;
+  }
+  
+  .categories h2 {
+    margin-bottom: 20px;
+  }
+  
+  .category-list {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .category {
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .category img {
+    display: block;
+    margin: 0 auto 10px;
+  }
+  
