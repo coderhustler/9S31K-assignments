@@ -1,0 +1,424 @@
+RAJEEV MISHRA - 12110321 - 9S31K (MERN)
+ASSIGNMENT NUMBER - 5
+
+
+
+
+Promises -
+Explain what a JavaScript Promise is and describe its primary purpose.
+
+A promise in JavaScript is an object that represents the eventual completion or failure of an asynchronous operation. It is used for handling asynchronous operations, such as making API calls or reading files, in a more organized and readable way.
+
+Promises have three states:
+Pending: The initial state. The promise is still being resolved or rejected.
+Fulfilled: The asynchronous operation has been completed successfully, and the promise is resolved. It returns a value.
+Rejected: The asynchronous operation has encountered an error, and the promise is rejected. It returns an error.
+
+Promises have two main methods:
+then(): This method is called when the promise is fulfilled. It takes two optional callbacks, one for success and one for failure. The success callback receives the resolved value, and the failure callback receives the rejected error.
+
+For eg1:- 
+	let promise = new Promise(function (resolve, reject) {
+    resolve('Geeks For Geeks');
+})
+promise
+    .then(function (successMessage) {
+        //success handler function is invoked 
+        console.log(successMessage);
+    }, function (errorMessage) {
+        console.log(errorMessage);
+    });
+This example shows how the then method handles when a promise is resolved
+
+For eg2: - 
+let promise = new Promise(function (resolve, reject) {
+    reject('Promise Rejected')
+})
+promise
+    .then(function (successMessage) {
+        console.log(successMessage);
+    }, function (errorMessage) {
+        //error handler function is invoked 
+        console.log(errorMessage);
+    });
+This example shows the condition when a rejected promise is handled by second function of then method.
+
+
+catch(): This method is called when the promise is rejected. It takes a callback function that receives the error.
+For eg: - 
+let promise = new Promise(function (resolve, reject) {
+    reject('Promise Rejected')
+})
+promise
+    .then(function (successMessage) {
+        console.log(successMessage);
+    })
+    .catch(function (errorMessage) {
+        //error handler function is invoked 
+        console.log(errorMessage);
+    }); 
+This example shows the catch method handling the reject function of promise.
+
+Primary Purpose: The primary purpose of a Promise is to provide a more manageable way to handle the outcomes and possible errors of asynchronous operations, avoiding the need for deeply nested callbacks, known as “callback hell.”
+
+Describe the states of a Promise and what each state signifies.
+States of a Promise:
+
+Pending - This is the initial state of a Promise, representing an operation that has not yet completed.In this state, the Promise object exists, but its final outcome (either success or failure) is not yet known.
+
+For eg1:- 
+let promise = new Promise(function (resolve, reject) {
+  // This is the executor function where the asynchronous operation would be initiated.
+});
+
+
+Fulfilled (or Resolved) -  A Promise transitions to the fulfilled state when the asynchronous operation completes successfully. When a Promise is fulfilled, it will call the .then()  method's first function (if provided), passing the resolved value to it. The state is immutable, meaning once a Promise is fulfilled, it cannot transition to any other state or change its value.
+
+For eg2:- 
+let promise = new Promise(function (resolve, reject) {
+    resolve('Geeks For Geeks');
+})
+promise
+    .then(function (successMessage) {
+        //success handler function is invoked 
+        console.log(successMessage);
+    }, function (errorMessage) {
+        console.log(errorMessage);
+    });
+This example shows how the then method handles when a promise is resolved
+
+Rejected - A Promise transitions to the rejected state when the asynchronous operation fails. When a Promise is rejected, it will call the .then() method's second function (if provided) or the .catch() method, passing the reason for rejection to it. Similar to the fulfilled state, once a Promise is rejected, it cannot change its state or rejection reason.
+
+For eg3: - 
+let promise = new Promise(function (resolve, reject) {
+    reject('Promise Rejected')
+})
+promise
+    .then(function (successMessage) {
+        console.log(successMessage);
+    })
+    .catch(function (errorMessage) {
+        //error handler function is invoked 
+        console.log(errorMessage);
+    }); 
+This example shows the catch method handling the reject function of promise.
+
+API -
+Explain what an API (Application Programming Interface) is in the context of web development and how JavaScript interacts with it.
+
+APIs are mechanisms that enable two software components to communicate with each other using a set of definitions and protocols. For example, the weather bureau’s software system contains daily weather data. The weather app on your phone “talks” to this system via APIs and shows you daily weather updates on your phone.
+
+APIs can be used for various purposes, such as retrieving data from a remote server, sending data to a server, or performing operations on a server. In web development, APIs are often used to enable client-side applications to interact with server-side services.
+
+Types of APIs:
+SOAP APIs - These APIs use Simple Object Access Protocol. Client and server exchange messages using XML. 
+RPC APIs - These APIs are called Remote Procedure Calls. The client completes a function (or procedure) on the server, and the server sends the output back to the client.
+Websocket APIs - Websocket API is another modern web API development that uses JSON objects to pass data. A WebSocket API supports two-way communication between client apps and the server. The server can send callback messages to connected clients, making it more efficient than the REST API.
+REST APIs - These are the most popular and flexible APIs found on the web today. The client sends requests to the server as data. The server uses this client input to start internal functions and returns output data back to the client.
+
+JavaScript, as a client-side scripting language, interacts with APIs to fetch data from web servers or send data to servers. This interaction usually happens over HTTP or HTTPS using methods such as GET, POST, PUT, DELETE, etc.
+
+Common methods for making API requests in JavaScript include:
+XMLHttpRequest: older way of making HTTP requests.
+Fetch API: promise-based approach to making HTTP requests.
+Third-party libraries: Axios
+These mechanisms allow JavaScript to send HTTP requests to servers and process responses.
+
+For eg: - 
+fetch('name-of-api')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
+This code sends a GET request to the specified URL, retrieves data from the response, and logs it to the console or handles errors if any occur.
+JavaScript interacts with an API:
+Send Request: JavaScript uses an HTTP client (like Fetch API) to send a request to a server. This request could be for data retrieval (GET), data submission (POST), updating data (PUT/PATCH), or deleting data (DELETE).
+Process Response: The server processes the request, performs necessary actions, and sends back a response. This response could be in various formats, such as JSON, XML, or plain text.
+Handle Data: JavaScript then processes the response, often parsing the data if it’s in JSON or XML format, and then uses it within the application, such as displaying it on a webpage.
+
+
+Describe the difference between synchronous and asynchronous API calls in JavaScript. Why are asynchronous calls generally preferred?
+
+
+Synchronous API Calls: Synchronous calls in JavaScript block the execution of code until they complete. The program waits for the API call to return a response before moving on to the next line of code.
+For eg1:- A synchronous HTTP request.
+
+
+Asynchronous API Calls: Asynchronous calls, on the other hand, allow the code to continue running while waiting for the response. This is achieved using callbacks, Promises, or async/await syntax.
+For eg2:- Using the Fetch API or XMLHttpRequest with a callback.
+Why Asynchronous Calls Are Preferred: Asynchronous calls are generally preferred because they improve the responsiveness and performance of applications. They prevent the UI from freezing while waiting for long-running tasks (like network requests) to complete. This is especially important in web development, where user experience is paramount.
+
+
+What is the Fetch API in JavaScript? Provide an example of how to make a GET request using the Fetch API and explain the code.
+
+The Fetch API provides a modern, promise-based approach to making HTTP requests in JavaScript. It simplifies the process of fetching resources. It’s more powerful and flexible than XHR and is based on Promises, making it easier to work with asynchronous operations.
+For eg:- 
+fetch(‘name-of-api’, { method: 'GET' })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network not ok ' + response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => console.log(data))
+  .catch(error => console.error('There is a problem with your fetch operation:', error));
+
+
+
+
+useEffect -
+Explain the purpose of the useEffect hook in React.
+
+The useEffect Hook allows you to perform side effects in your components.
+Some examples of side effects are: fetching data, directly updating the DOM, and timers.
+
+The primary purpose of useEffect() is to replicate the behavior of lifecycle methods found in class components like componentDidMount, componentDidUpdate, and componentWillUnmount within function components.
+
+useEffect runs on every render. That means that when the component changes, a render happens, which then triggers another effect.
+
+
+Describe the syntax of the useEffect hook and explain how it can be used to perform side effects in functional components. Provide an example to illustrate your explanation.
+
+Syntax:- It takes two arguments: a function that contains the side-effect logic and an optional array of dependencies.
+useEffect(<function>, <dependency>)
+
+For eg:- 
+useEffect(() => {
+    return () => {
+    };
+}, [dependencies]);
+
+Working:- 
+call useEffect with a callback function that contains the side effect logic.
+By default, this function runs after every render of the component.
+can optionally provide a dependency array as the second argument.
+The effect will only run again if any of the values in the dependency array change.
+
+We need to import it first using  - import {useEffect} from ‘react’;
+
+useEffect triggers a function on every component render,
+
+It is also capable of handling componentDidMount(), componentDidUpdate(), and componentWillUnmount() life-cycle methods of class-based components into the functional components.
+
+
+How can you control when the useEffect hook runs? Discuss the role of the dependency array and provide examples of different use cases.
+
+The useEffect hook runs after every render by default. 
+However, we can control when it runs by providing a second argument: the dependency array.
+This array tells React to re-run the effect only if one of the dependencies has changed since the last render.
+
+Use cases for controlling useEffect:
+
+No Dependency Array: The effect runs after every render.
+For eg1:- 
+useEffect(() => {
+    // Effect logic
+}); // No dependency array
+
+Empty Dependency Array: The effect runs only once after the initial render.
+For eg2:- 
+useEffect(() => {
+    // Effect logic
+}, []); // Empty dependency array
+
+Specific Dependencies: The effect runs when any value in the dependency array changes.
+For eg3:-
+useEffect(() => {
+    // Effect logic
+}, [prop1, stateVar1]); // Runs when prop1 or stateVar1 changes
+
+Conditional Side Effects: Re-running the effect conditionally based on certain state or props.
+For eg4:- 
+useEffect(() => {
+    // Effect logic
+
+    return () => {
+        // Cleanup logic
+    };
+}, [someState]); // Runs when someState changes
+
+INPUT:- 
+import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+  }, []); //
+  return <h1>I've rendered {count} times!</h1>;
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Timer />);
+
+OUTPUT:- I have rendered 1 times!
+
+
+
+
+useState - 
+Explain what the useState hook is in React and its primary purpose in functional components.
+
+The useState hook is a special function in React that is used to add state to functional components. Here, state refers to data or properties that need to be tracked in an application.
+Prior to hooks, state management was only possible in class components using this.state and this.setState(). 
+
+The primary purpose of the useState hook is to add state to functional components. State is a way to store and manage dynamic data within a component, allowing components to respond to user inputs, server responses, or other events.
+
+IMAGE - 
+
+Notes made during class
+
+Describe the syntax of the useState hook and explain the meaning of its return values.
+
+The useState hook is a function in React that is used to add state to functional components.
+
+Syntax:- 
+const [stateValue, setStateValue] = useState(initialValue);
+
+state: The current state value.
+setState: A function that updates the state value.
+initialState: The initial value of the state, which can be of any type (string, number, array, object, etc.).
+
+The return values are:
+
+stateValue: This is the current value of your state
+setStateValue: This is a function that you can call to update stateValue.
+
+IMAGE - 
+
+Notes made during class
+
+
+
+How can you initialize state with the useState hook? Provide an example with a detailed explanation.
+
+Initializing state with 0:-
+const [count, setCount] = useState(0); 
+Here we need to pass the initializing value as a parameter in the useState() parenthesis itself.
+
+For eg:-
+import React, { useState } from 'react';
+
+function ExampleComponent() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+In this example, count starts at 0. When I click the button, setCount updates count and is increased by 1 and React re-renders ExampleComponent with the new count value.
+
+
+What is the significance of the setter function returned by the useState hook? Illustrate with an example how you can update the state.
+
+setState is the setter function that lets us update the state variable, triggering React to re-render the component.
+
+For eg:- 
+const [state, setState] = useState(initialValue)
+
+In React, you can’t modify state directly; you must use this setter function to ensure React knows about the change and can update the UI accordingly.
+
+Setter function is the only way to update the state value after the initial render. 
+
+For eg:- 
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  function handleIncrement() {
+    // Using the setter function to update the count
+    setCount(count + 1);
+  }
+
+  return (
+    <div>
+      <p>The count is: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  );
+}
+Working:- 
+Start with count set to 0.
+When the button is clicked, handleIncrement is called.
+Inside handleIncrement, we call setCount with count + 1, which tells React to re-render Counter with the new count value.
+
+Files in React app -
+Explain the typical structure of a React project. What are the main directories and files you would expect to find, and what is the purpose of each?
+
+Project Structure:- 
+
+node_modules/: This directory contains all the packages and dependencies installed via npm ie Node Package Manager.
+
+public/: It holds static assets like the main index.html, favicons, and any other static resources.
+
+src/: This is where most of your development will happen. It contains your React components, application logic, styles, images, and more.
+
+App.js: The main React component that serves as the root of your app.
+index.js: The entry point file that renders your App component to the DOM.
+components/: A directory for all your reusable components.
+pages/ or views/: Contains components that represent different pages/views in your app.
+styles/: For CSS or styling-related files.
+
+.gitignore: Specifies intentionally untracked files to ignore when using Git.
+
+package.json: Lists all the project dependencies and scripts for running, building, and testing your app
+
+
+					Notes made during class
+Discuss the role of configuration files such as package.json
+
+
+Metadata:
+name: The name of the project.
+version: The current version of the project.
+description: A brief description of the project.
+author: The author of the project.
+license: The license type for the project.
+
+Dependencies:
+dependencies: Lists the npm packages required for the application to run. These packages are installed when you run npm install or yarn install.
+
+
+For eg:- 
+	"dependencies": {
+  "react": "^17.0.2",
+  "react-dom": "^17.0.2",
+  "react-router-dom": "^5.2.0"
+}
+
+DevDependencies:
+devDependencies: Lists npm packages needed only for development, such as testing tools and build tools.
+For eg:-
+"devDependencies": {
+  "eslint": "^7.32.0",
+  "jest": "^27.0.6"
+}
+
+Scripts:
+scripts: command-line scripts that run using npm run
+Common Scripts:
+start: Starts the development server.
+build: Builds the application for production.
+test: Runs the test suite.
+eject: Ejects the project from Create React App setup, exposing the configuration files.
+For eg:-
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+}
+
+
+					IMAGE FROM VSCODE
+
+		RAJEEV MISHRA - 12110321 - 9S31K (MERN) - Assignment Number:- 5
